@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Football Legends</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:
+        radial-gradient(circle at top,#12345a,#050b14 65%);
+    color:white;
+    min-height:100vh;
+}
+
+/* HEADER */
+
+header{
+    padding:45px 20px;
+    text-align:center;
+    background:
+        linear-gradient(135deg,#071b35cc,#087f5bcc),
+        url("https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=1600&q=80")
+        center/cover;
+    border-bottom:3px solid #00ff88;
+}
+
+header h1{
+    font-size:52px;
+    text-transform:uppercase;
+    letter-spacing:4px;
+    text-shadow:0 5px 20px #000;
+}
+
+header p{
+    margin-top:12px;
+    font-size:20px;
+    color:#d7fff0;
+}
+
+/* NAVIGATION */
+
+nav{
+    position:sticky;
+    top:0;
+    z-index:100;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:8px;
+    padding:15px;
+    background:#07111deF;
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid #ffffff22;
+}
+
+nav button{
+    padding:10px 15px;
+    border:1px solid #ffffff22;
+    border-radius:10px;
+    background:#12263d;
+    color:white;
+    cursor:pointer;
+    transition:.25s;
+}
+
+nav button:hover{
+    background:#00c878;
+    transform:translateY(-2px);
+}
+
+nav button.active{
+    background:#00d47a;
+    color:#04130c;
+    box-shadow:0 0 15px #00ff8888;
+}
+
+/* MAIN */
+
+main{
+    max-width:1100px;
+    margin:35px auto;
+    padding:20px;
+}
+
+.tab{
+    display:none;
+    animation:show .4s ease;
+}
+
+.tab.active{
+    display:block;
+}
+
+@keyframes show{
+    from{
+        opacity:0;
+        transform:translateY(15px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* CARDS */
+
+.card{
+    background:linear-gradient(145deg,#10283f,#0b1828);
+    border:1px solid #ffffff18;
+    border-radius:22px;
+    padding:30px;
+    margin-bottom:20px;
+    box-shadow:0 15px 40px #0007;
+}
+
+.card h2{
+    color:#00ed8a;
+    font-size:34px;
+    margin-bottom:15px;
+}
+
+.card h3{
+    color:#52ffc0;
+    margin:20px 0 10px;
+}
+
+.card p{
+    color:#d6e5ee;
+    line-height:1.8;
+    font-size:17px;
+}
+
+.player-title{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.flag{
+    font-size:45px;
+}
+
+.player-name{
+    font-size:40px;
+}
+
+/* STATS */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:15px;
+    margin-top:25px;
+}
+
+.stat{
+    padding:20px;
+    background:#173651;
+    border-radius:15px;
+    text-align:center;
+    border:1px solid #ffffff12;
+}
+
+.stat strong{
+    display:block;
+    color:#00ff91;
+    font-size:25px;
+    margin-bottom:7px;
+}
+
+/* TABLE */
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+}
+
+th,td{
+    padding:14px;
+    border-bottom:1px solid #ffffff1c;
+    text-align:left;
+}
+
+th{
+    background:#00a866;
+}
+
+tr:hover{
+    background:#ffffff08;
+}
+
+/* TAGS */
+
+.tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:15px;
+}
+
+.tag{
+    padding:9px 14px;
+    background:#00a86b;
+    border-radius:30px;
+    font-size:14px;
+}
+
+/* FOOTER */
+
+footer{
+    text-align:center;
+    padding:40px;
+    margin-top:40px;
+    background:#030911;
+    color:#8193a5;
+}
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    header h1{
+        font-size:34px;
+    }
+
+    .player-name{
+        font-size:28px;
+    }
+
+    .card{
+        padding:20px;
+    }
+
+    nav{
+        position:relative;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>⚽ Football Legends</h1>
+    <p>История великих футболистов мира</p>
+</header>
+
+<nav>
+
+<button onclick="openTab(1)">🏠 Главная</button>
+<button onclick="openTab(2)">🇵🇹 Роналду</button>
+<button onclick="openTab(3)">🇦🇷 Месси</button>
+<button onclick="openTab(4)">🇧🇷 Неймар</button>
+<button onclick="openTab(5)">🇫🇷 Мбаппе</button>
+<button onclick="openTab(6)">🇳🇴 Холанд</button>
+<button onclick="openTab(7)">🇭🇷 Модрич</button>
+<button onclick="openTab(8)">🇪🇬 Салах</button>
+<button onclick="openTab(9)">🇵🇱 Левандовски</button>
+<button onclick="openTab(10)">🇧🇪 Де Брёйне</button>
+<button onclick="openTab(11)">🏴 Беллингем</button>
+<button onclick="openTab(12)">🏴 Кейн</button>
+<button onclick="openTab(13)">🇧🇷 Винисиус</button>
+<button onclick="openTab(14)">🇫🇷 Бензема</button>
+<button onclick="openTab(15)">🇸🇪 Ибрагимович</button>
+<button onclick="openTab(16)">🇧🇷 Роналдиньо</button>
+<button onclick="openTab(17)">🇫🇷 Зидан</button>
+<button onclick="openTab(18)">🇧🇷 Пеле</button>
+<button onclick="openTab(19)">🇦🇷 Марадона</button>
+<button onclick="openTab(20)">🇪🇸 Иньеста</button>
+<button onclick="openTab(21)">🇪🇸 Хави</button>
+<button onclick="openTab(22)">🇮🇹 Пирло</button>
+<button onclick="openTab(23)">🇧🇷 Кака</button>
+<button onclick="openTab(24)">🇪🇸 Рамос</button>
+<button onclick="openTab(25)">🇩🇪 Нойер</button>
+<button onclick="openTab(26)">🇳🇱 Роббен</button>
+<button onclick="openTab(27)">🇫🇷 Гризманн</button>
+<button onclick="openTab(28)">🇩🇪 Кроос</button>
+<button onclick="openTab(29)">🇸🇳 Мане</button>
+<button onclick="openTab(30)">🏆 Легенды</button>
+
+</nav>
+
+<main>
+
+<!-- 1 -->
+
+<section id="tab1" class="tab active">
+
+<div class="card">
+
+<h2>⚽ Football Legends</h2>
+
+<p>
+Добро пожаловать на сайт о великих футболистах.
+Здесь собрана информация о легендарных игроках разных поколений:
+их карьере, стиле игры, клубах, сборных и главных достижениях.
+</p>
+
+<div class="stats">
+
+<div class="stat">
+<strong>30</strong>
+Вкладок
+</div>
+
+<div class="stat">
+<strong>25+</strong>
+Игроков
+</div>
+
+<div class="stat">
+<strong>⚽</strong>
+Футбольная история
+</div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>🌟 Главные темы</h2>
+
+<div class="tags">
+<span class="tag">Роналду</span>
+<span class="tag">Месси</span>
+<span class="tag">Неймар</span>
+<span class="tag">Мбаппе</span>
+<span class="tag">Холанд</span>
+<span class="tag">Пеле</span>
+<span class="tag">Марадона</span>
+<span class="tag">Зидан</span>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- 2 RONALDO -->
+
+<section id="tab2" class="tab">
+
+<div class="card">
+
+<div class="player-title">
+<span class="flag">🇵🇹</span>
+<h2 class="player-name">Криштиану Роналду</h2>
+</div>
+
+<p>
+Криштиану Роналду — португальский футболист,
+известный своей результативностью, скоростью,
+физической подготовкой и игрой в воздухе.
+</p>
+
+<div class="stats">
+
+<div class="stat">
+<strong>🇵🇹</strong>
+Португалия
+</div>
+
+<div class="stat">
+<strong>⚽</strong>
+Нападающий
+</div>
+
+<div class="stat">
+<strong>7</strong>
+Номер
+</div>
+
+<div class="stat">
+<strong>⭐</strong>
+Мировая звезда
+</div>
+
+</div>
+
+<h3>🎯 Стиль игры</h3>
+
+<p>
+Сильными сторонами Роналду являются удар с обеих ног,
+игра головой, скорость, физическая мощь и умение
+находить свободное пространство в штрафной площади.
+</p>
+
+<h3>🏟️ Клубная карьера</h3>
+
+<p>
+В профессиональной карьере Роналду выступал за
+Sporting CP, Manchester United, Real Madrid и Juventus,
+а также играл за сборную Португалии.
+</p>
+
+<h3>🏆 Достижения</h3>
+
+<div class="tags">
+<span class="tag">Лига чемпионов</span>
+<span class="tag">Евро</span>
+<span class="tag">Золотой мяч</span>
+<span class="tag">Клубные трофеи</span>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- 3 MESSI -->
+
+<section id="tab3" class="tab">
+
+<div class="card">
+
+<div class="player-title">
+<span class="flag">🇦🇷</span>
+<h2 class="player-name">Лионель Месси</h2>
+</div>
+
+<p>
+Лионель Месси — аргентинский футболист,
+известный выдающимся дриблингом, контролем мяча,
+передачами и завершением атак.
+</p>
+
+<div class="stats">
+
+<div class="stat">
+<strong>🇦🇷</strong>
+Аргентина
+</div>
+
+<div class="stat">
+<strong>10</strong>
+Номер
+</div>
+
+<div class="stat">
+<strong>⚽</strong>
+Атакующий игрок
+</div>
+
+<div class="stat">
+<strong>🏆</strong>
+Чемпион мира
+</div>
+
+</div>
+
+<h3>🎨 Стиль игры</h3>
+
+<p>
+Месси способен обыгрывать нескольких соперников,
+создавать голевые моменты и выполнять точные передачи
+между линиями.
+</p>
+
+<h3>🏟️ Клубы</h3>
+
+<p>
+Основная часть его европейской карьеры связана с
+Barcelona. Позже он выступал за Paris Saint-Germain
+и продолжил карьеру в Inter Miami.
+</p>
+
+<h3>🏆 Главные достижения</h3>
+
+<div class="tags">
+<span class="tag">Чемпион мира</span>
+<span class="tag">Лига чемпионов</span>
+<span class="tag">Золотой мяч</span>
+<span class="tag">Кубок Америки</span>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- PLAYERS 4-29 -->
+
+<script>
+
+const players = [
+
+["Неймар","🇧🇷","Бразилия","Техника, финты и дриблинг",
+"Один из наиболее техничных атакующих игроков своего поколения.",
+"Barcelona • Paris Saint-Germain • Al Hilal"],
+
+["Килиан Мбаппе","🇫🇷","Франция","Скорость и завершение атак",
+"Французский нападающий, известный своей скоростью и резкими ускорениями.",
+"Monaco • Paris Saint-Germain • Real Madrid"],
+
+["Эрлинг Холанд","🇳🇴","Норвегия","Мощь и результативность",
+"Норвежский нападающий, известный физической силой и высокой результативностью.",
+"RB Salzburg • Borussia Dortmund • Manchester City"],
+
+["Лука Модрич","🇭🇷","Хорватия","Передачи и контроль игры",
+"Опытный полузащитник, известный видением поля и точностью передач.",
+"Tottenham • Real Madrid"],
+
+["Мохамед Салах","🇪🇬","Египет","Скорость и голы",
+"Египетский атакующий игрок, много лет являющийся важной фигурой Liverpool.",
+"Chelsea • Roma • Liverpool"],
+
+["Роберт Левандовски","🇵🇱","Польша","Завершение атак",
+"Польский нападающий, известный позиционной игрой и умением забивать.",
+"Borussia Dortmund • Bayern Munich • Barcelona"],
+
+["Кевин Де Брёйне","🇧🇪","Бельгия","Пасы и создание моментов",
+"Полузащитник с отличным видением поля и сильными передачами.",
+"Wolfsburg • Manchester City"],
+
+["Джуд Беллингем","🏴","Англия","Универсальная полузащита",
+"Молодой английский игрок, способный эффективно действовать в разных зонах поля.",
+"Birmingham City • Borussia Dortmund • Real Madrid"],
+
+["Гарри Кейн","🏴","Англия","Голы и передачи",
+"Английский нападающий с сильным ударом и хорошим пониманием игры.",
+"Tottenham • Bayern Munich"],
+
+["Винисиус Жуниор","🇧🇷","Бразилия","Дриблинг и скорость",
+"Бразильский атакующий игрок, известный резкими рывками и обыгрышем соперников.",
+"Flamengo • Real Madrid"],
+
+["Карим Бензема","🇫🇷","Франция","Комбинационная игра",
+"Французский нападающий, способный как завершать атаки, так и создавать моменты.",
+"Lyon • Real Madrid • Al-Ittihad"],
+
+["Златан Ибрагимович","🇸🇪","Швеция","Сила и техника",
+"Шведский нападающий, известный нестандартными ударами и ярким стилем.",
+"Ajax • Inter • Milan • PSG • Manchester United"],
+
+["Роналдиньо","🇧🇷","Бразилия","Финты и творчество",
+"Один из самых узнаваемых игроков благодаря технике и эффектным финтам.",
+"PSG • Barcelona • Milan"],
+
+["Зинедин Зидан","🇫🇷","Франция","Контроль и техника",
+"Французский полузащитник, известный элегантной техникой и передачами.",
+"Juventus • Real Madrid"],
+
+["Пеле","🇧🇷","Бразилия","Завершение и техника",
+"Одна из наиболее известных фигур в истории мирового футбола.",
+"Santos • New York Cosmos"],
+
+["Диего Марадона","🇦🇷","Аргентина","Дриблинг и творчество",
+"Аргентинский футболист, прославившийся техникой и индивидуальными действиями.",
+"Barcelona • Napoli • Boca Juniors"],
+
+["Андрес Иньеста","🇪🇸","Испания","Контроль мяча",
+"Испанский полузащитник, известный техникой, передачами и спокойствием с мячом.",
+"Barcelona • Vissel Kobe"],
+
+["Хави","🇪🇸","Испания","Пасы и позиционная игра",
+"Один из известных представителей испанской школы контроля мяча.",
+"Barcelona • Al Sadd"],
+
+["Андреа Пирло","🇮🇹","Италия","Длинные передачи",
+"Итальянский полузащитник, известный стандартами и дальними передачами.",
+"Milan • Juventus • Inter"],
+
+["Кака","🇧🇷","Бразилия","Атаки и скорость",
+"Бразильский атакующий полузащитник с сильным рывком и техникой.",
+"Milan • Real Madrid"],
+
+["Серхио Рамос","🇪🇸","Испания","Защита и игра головой",
+"Испанский защитник, известный лидерскими качествами и игрой на стандартах.",
+"Real Madrid • PSG • Sevilla"],
+
+["Мануэль Нойер","🇩🇪","Германия","Игра вратаря",
+"Немецкий вратарь, известный активной игрой за пределами штрафной.",
+"Schalke • Bayern Munich"],
+
+["Арьен Роббен","🇳🇱","Нидерланды","Скорость и левый удар",
+"Нидерландский вингер, известный фирменным смещением с фланга в центр.",
+"Chelsea • Real Madrid • Bayern Munich"],
+
+["Антуан Гризманн","🇫🇷","Франция","Универсальность",
+"Французский атакующий игрок, способный играть на нескольких позициях.",
+"Real Sociedad • Atletico Madrid • Barcelona"],
+
+["Тони Кроос","🇩🇪","Германия","Пасы и контроль темпа",
+"Немецкий полузащитник, известный точными передачами и контролем темпа.",
+"Bayern Munich • Real Madrid"],
+
+["Садио Мане","🇸🇳","Сенегал","Скорость и прессинг",
+"Сенегальский атакующий игрок, известный скоростью и активной игрой.",
+"Southampton • Liverpool • Bayern Munich"]
+
+];
+
+players.forEach((p,index)=>{
+
+let tabNumber=index+4;
+
+document.write(`
+
+<section id="tab${tabNumber}" class="tab">
+
+<div class="card">
+
+<div class="player-title">
+
+<span class="flag">${p[1]}</span>
+
+<h2 class="player-name">${p[0]}</h2>
+
+</div>
+
+<p>${p[4]}</p>
+
+<div class="stats">
+
+<div class="stat">
+<strong>${p[1]}</strong>
+${p[2]}
+</div>
+
+<div class="stat">
+<strong>⚽</strong>
+${p[3]}
+</div>
+
+<div class="stat">
+<strong>⭐</strong>
+Футбольная звезда
+</div>
+
+</div>
+
+<h3>🎯 Стиль игры</h3>
+
+<p>
+${p[3]} — одна из главных характеристик игрового стиля
+${p[0]}. Игрок способен влиять на игру благодаря
+своим техническим и тактическим качествам.
+</p>
+
+<h3>🏟️ Клубная карьера</h3>
+
+<p>${p[5]}</p>
+
+<h3>🔥 Что делает игрока особенным?</h3>
+
+<div class="tags">
+
+<span class="tag">⚽ Техника</span>
+<span class="tag">🔥 Опыт</span>
+<span class="tag">⭐ Матчи высокого уровня</span>
+<span class="tag">🏆 Трофеи</span>
+
+</div>
+
+</div>
+
+</section>
+
+`);
+
+});
+
+</script>
+
+
+<!-- 30 -->
+
+<section id="tab30" class="tab">
+
+<div class="card">
+
+<h2>🏆 Футбольные легенды</h2>
+
+<p>
+В истории футбола было множество великих игроков.
+Каждое поколение имело собственных звезд,
+которые изменяли представление об игре.
+</p>
+
+<table>
+
+<tr>
+<th>Игрок</th>
+<th>Страна</th>
+<th>Главная характеристика</th>
+</tr>
+
+<tr>
+<td>Криштиану Роналду</td>
+<td>🇵🇹 Португалия</td>
+<td>Результативность</td>
+</tr>
+
+<tr>
+<td>Лионель Месси</td>
+<td>🇦🇷 Аргентина</td>
+<td>Дриблинг и передачи</td>
+</tr>
+
+<tr>
+<td>Пеле</td>
+<td>🇧🇷 Бразилия</td>
+<td>Голы и техника</td>
+</tr>
+
+<tr>
+<td>Марадона</td>
+<td>🇦🇷 Аргентина</td>
+<td>Дриблинг</td>
+</tr>
+
+<tr>
+<td>Зидан</td>
+<td>🇫🇷 Франция</td>
+<td>Техника</td>
+</tr>
+
+<tr>
+<td>Роналдиньо</td>
+<td>🇧🇷 Бразилия</td>
+<td>Финты</td>
+</tr>
+
+</table>
+
+</div>
+
+</section>
+
+</main>
+
+<footer>
+
+<p>⚽ FOOTBALL LEGENDS</p>
+<p>Сайт о великих футболистах мира</p>
+
+</footer>
+
+
+<script>
+
+function openTab(number){
+
+    document.querySelectorAll(".tab")
+        .forEach(tab => tab.classList.remove("active"));
+
+    document.querySelectorAll("nav button")
+        .forEach(button => button.classList.remove("active"));
+
+    document.getElementById("tab"+number)
+        .classList.add("active");
+
+    event.currentTarget.classList.add("active");
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+}
+
+</script>
+
+</body>
+</html>
+Cristiano Ronaldo 7
